@@ -20,7 +20,6 @@ import { useUploadThing } from "@/lib/uploadthing";
 import { usePathname, useRouter } from 'next/navigation';
 import { updateUser } from '@/lib/actions/userActions'
 
-
 const AccountProfile = ({user, btnTitle }) => {
 
   const [files, setFiles] = useState([]);
@@ -102,7 +101,7 @@ const AccountProfile = ({user, btnTitle }) => {
                 {field.value ? (
                   <Image src={field.value} alt='profile photo' width={96} height={96} priority className='rounded-full object-contain'/>
                 ) : (
-                  <Image src="/profile.svg" width={24} height={24} className='object-contain' />
+                  <Image src="/profile.svg" alt='profile' width={24} height={24} className='object-contain' />
                 )}
               </FormLabel>
               <FormControl className="flex-1 text-base-semibold text-gray-200" >

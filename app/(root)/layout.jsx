@@ -1,3 +1,4 @@
+
 import { Inter } from 'next/font/google'
 import '../globals.css'
 import { ClerkProvider } from '@clerk/nextjs'
@@ -9,11 +10,11 @@ import Bottombar from '../../components/shared/Bottombar'
 
 const inter = Inter({ subsets: ['latin'] })
 
-export const metadata = {
-  title: 'Threads',
-  description: 'A Next.js 13 Threads application',
+// export const metadata = {
+//   title: 'Threads',
+//   description: 'A Next.js 13 Threads application',
   
-}
+// }
 
 export default function RootLayout({ children }) {
   return (

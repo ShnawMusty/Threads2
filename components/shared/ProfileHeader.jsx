@@ -1,7 +1,7 @@
 import Image from 'next/image'
-import React from 'react'
 
-const ProfileHeader = ({accountId, authUserId, name, username, imgUrl, bio}) => {
+const ProfileHeader = ({accountId, authUserId, name, username, imgUrl, bio, type}) => {
+
   return (
     <div className='flex flex-col w-full justify-start'>
       <div className='flex items-center justify-between'>

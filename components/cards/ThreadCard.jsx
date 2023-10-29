@@ -1,17 +1,21 @@
+import { fetchCommunityDetails } from "@/lib/actions/communityActions";
+import { formatDateString } from "@/lib/utils";
 import Image from "next/image";
 import Link from "next/link";
 
-const ThreadCard = ({
+const ThreadCard = async ({
   id,
   currentUserId,
   parentId,
   content,
   author,
-  community,
+  communityId,
   createdAt,
   comments,
   isComment,
 }) => {
+
+  const community = await fetchCommunityDetails(communityId);
   return (
     <article className={`flex flex-col w-full rounded-xl ${isComment ? 'px-0 xs:px-7' : 'bg-dark-2 p-7'} `}>
       <div className="flex items-start justify-between">
@@ -22,7 +26,7 @@ const ThreadCard = ({
                 src={author.image}
                 alt="profile image"
                 fill
-                className="cursor-pointer rounded-full object-cover"
+                className="rounded-full object-cover"
               />
             </Link>
             <div className="thread-card_bar" />
@@ -81,6 +85,17 @@ const ThreadCard = ({
           </div>
         </div>
       </div>
+      {/* todo: delete thread */}
+      {/* show comment logos */}
+      {!isComment && community && (
+        <Link href={`/communities/${community.id}`} className="mt-5 flex items-center">
+          <p className="text-subtle-medium text-gray-1">
+            {formatDateString(createdAt)}{" "}- {community.name} Community
+          </p>
+        
+          <Image src={community.image} alt={community.name} width={16} height={16} className="w-auto h-auto aspect-[1/1] ml-1 rounded-full object-cover"/>
+        </Link>
+      )}
     </article>
   );
 };

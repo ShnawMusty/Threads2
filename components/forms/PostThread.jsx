@@ -14,12 +14,13 @@ import { Textarea } from "@/components/ui/textarea";
 import { usePathname, useRouter } from 'next/navigation';
 import { threadValidation } from '@/lib/validations/thread';
 import { createThread } from '@/lib/actions/threadActions'
-
+import { useOrganization } from '@clerk/nextjs';
 
 
 function PostThread({userId}) {
     const pathname = usePathname();
     const router = useRouter();
+    const { organization } = useOrganization();
     
     const form = useForm({
       resolver: zodResolver(threadValidation),
@@ -33,9 +34,9 @@ function PostThread({userId}) {
         await createThread({
           text: values.thread,
           author: userId,
-          communityId: null,
+          orgId: organization?.id || null,
           path: pathname
-          })
+          });
           router.push('/')
     };
 

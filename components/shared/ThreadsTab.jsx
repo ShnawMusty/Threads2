@@ -1,10 +1,18 @@
 import { fetchUserPosts } from "@/lib/actions/userActions"
 import ThreadCard from "../cards/ThreadCard";
+import { redirect } from "next/navigation";
+import { fetchCommunityPosts } from "@/lib/actions/communityActions";
 
 const ThreadsTab = async ({currentUserId, accountId, accountType}) => {
+  let result;
 
-  let result = await fetchUserPosts(accountId);
-
+  if(accountType === 'Community') {
+    result = await fetchCommunityPosts(accountId);
+  } else {
+    result = await fetchUserPosts(accountId);
+  }
+  
+  if (!result) redirect('/');
 
   return (
     <section className="mt-9 flex flex-col gap-10">
@@ -16,7 +24,7 @@ const ThreadsTab = async ({currentUserId, accountId, accountType}) => {
          parentId={thread.parentId}
          content={thread.text}
          author={accountType === 'User' ? {name: result.name, image: result.image, id: result.id} : {name: thread.author.name, image: thread.author.image, id: thread.author.id}} 
-         community={thread.communityId} // todo
+         community={ accountType === 'Community' ? {name: result.name, id: result.id, image: result.image} : thread.community } // todo
          createdAt={thread.createdAt}
          comments={thread.children}
         />

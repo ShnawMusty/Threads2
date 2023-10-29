@@ -1,10 +1,11 @@
-import { OrganizationSwitcher, SignOutButton, SignedIn } from '@clerk/nextjs'
+import { OrganizationSwitcher, SignOutButton, SignedIn} from '@clerk/nextjs'
 import { dark } from '@clerk/themes'
 import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
 
 function Topbar() {
+
   return (
     <nav className='topbar'>
       <Link href="/" className='flex items-center gap-4'>
